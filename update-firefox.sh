@@ -4,10 +4,10 @@ download_dir=/home/ecostales/Downloads
 firefox_parent_dir=/opt
 firefox_bin=/usr/bin/firefox
 firefox_arch=linux-x86_64
-firefox_lang=es-US
+firefox_lang=en-US
 
 /usr/bin/wget https://download-installer.cdn.mozilla.net/pub/firefox/releases/ -O /tmp/list.tmp
-release=$(grep release /tmp/listita |awk '{print $2}'|cut -c29-34|sort -h|tr -d "/"|tr -d "\""|egrep -v "(b|f|es)"|tail -n1)
+release=$(grep release /tmp/list.tmp |awk '{print $2}'|cut -c29-34|sort -h|tr -d "/"|tr -d "\""|egrep -v "(b|f|es)"|tail -n1)
 
 cd $download_dir
 /usr/bin/wget https://download-installer.cdn.mozilla.net/pub/firefox/releases/${release}/${firefox_arch}/${firefox_lang}/firefox-${release}.tar.bz2
