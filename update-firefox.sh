@@ -10,19 +10,19 @@ firefox_lang=en-US
 release=$(grep release /tmp/list.tmp |awk '{print $2}'|cut -c29-34|sort -h|tr -d "/"|tr -d "\""|egrep -v "(b|f|es)"|tail -n1)
 
 cd $download_dir
-/usr/bin/wget https://download-installer.cdn.mozilla.net/pub/firefox/releases/${release}/${firefox_arch}/${firefox_lang}/firefox-${release}.tar.bz2
+/usr/bin/wget -O /opt/firefox-${release}.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/${release}/${firefox_arch}/${firefox_lang}/firefox-${release}.tar.bz2
 
-mv firefox-${release}.tar.bz2 /opt/
 cd $firefox_parent_dir
 tar xfv firefox-${release}.tar.bz2
+rm -rf  firefox-${release}.tar.bz2
 
 if [ -f "firefox_bin" ]
 then
   continue
-else
+else 
   ln -s ${firefox_parent_dir}/firefox/firefox-bin $firefox_bin
 fi
 
-chown root.root firefox/ -R 
+chown root.root firefox/ -R
 rm -rf /tmp/list.tmp
 killall firefox
